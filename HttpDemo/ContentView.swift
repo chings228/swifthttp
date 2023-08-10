@@ -8,14 +8,43 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var vm = ViewModel()
+    
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            
+            Text(vm.githubUser?.avatar_url ?? "no value")
+            Text(vm.githubUser?.node_id ?? "no value")
+            
+            
+            List{
+                
+                ForEach(vm.commentlist){ comment in
+                    
+                    Text(comment.body)
+                    
+                }
+                
+            }
+
+            List{
+                
+                ForEach(vm.todolist){ todo in
+                    
+                    Text(todo.title)
+                    
+                }
+                
+            }
         }
         .padding()
+        .onAppear{
+            vm.getCommentData()
+            vm.getToDoData()
+            vm.getGitHubUser()
+        }
     }
 }
 
