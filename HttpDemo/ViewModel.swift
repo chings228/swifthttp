@@ -21,15 +21,24 @@ class ViewModel : ObservableObject{
     
     @Published var githubUser : GithubUser?
     
+    @Published var postTestData : PostTest?
+    
+    @Published var complexDataList : TestData?
+    
     func getCommentData(){
         
         let url = "https://jsonplaceholder.typicode.com/posts"
 
+        DataServices.getDataWithTypePostGet(url: url, classtype: [Comment].self, httptype: .get, postparam: nil) { dataObject, error in
+            <#code#>
+        }
+        
+        
         
         DataServices.getDataWithType(url: url, classtype: [Comment].self) { data, error in
             
             print("datatype")
-            print(data)
+            //print(data)
             if let error = error{
                 
                 print(error)
@@ -43,6 +52,61 @@ class ViewModel : ObservableObject{
 
           
         }
+    }
+    
+    func getComplexData(){
+        
+        
+        
+        let url = "https://usa.1328.hk/swiftdiffdatatype.php"
+        
+        DataServices.getDataWithTypePostGet(url: url, classtype: TestData.self, httptype: .get, postparam: nil) { list, error in
+            
+            if let error = error{
+                
+                print(error)
+                
+                return
+            }
+            
+            self.complexDataList = list as? TestData
+
+            
+            
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
+    func getPostTest(){
+        
+        
+        let url = "https://usa.1328.hk/swiftposttest.php"
+        
+        let postparam = "aaa=vvvv&bbb=wwww"
+
+        DataServices.getDataWithTypePostGet(url: url, classtype: PostTest.self, httptype: .post,postparam: postparam ) { list, error in
+            
+            if let error = error{
+                
+                print(error)
+                
+                return
+            }
+
+
+            
+            self.postTestData = list as? PostTest
+            
+            
+            
+        }
+        
+        
     }
     
     

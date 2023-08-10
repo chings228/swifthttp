@@ -15,6 +15,33 @@ struct ContentView: View {
     var body: some View {
         VStack {
             
+            if let complexDataList = vm.complexDataList {
+            List{
+                
+                
+                    
+                    ForEach(complexDataList.objs){obj in
+                        
+                        Text("\(obj.id)")
+                        Text(obj.val)
+                        
+                    }
+                }
+                
+                
+                
+                Text(complexDataList.error.description ?? "no description")
+            }
+            
+            
+            
+            
+            
+            Text(vm.postTestData?.aaa ?? "no value")
+            Text(vm.postTestData?.bbb ?? "no value")
+            
+            
+            
             Text(vm.githubUser?.avatar_url ?? "no value")
             Text(vm.githubUser?.node_id ?? "no value")
             
@@ -44,6 +71,8 @@ struct ContentView: View {
             vm.getCommentData()
             vm.getToDoData()
             vm.getGitHubUser()
+            vm.getPostTest()
+            vm.getComplexData()
         }
     }
 }

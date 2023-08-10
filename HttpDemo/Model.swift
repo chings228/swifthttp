@@ -38,3 +38,32 @@ struct GithubUser : Codable{
     let node_id : String
     
 }
+
+struct PostTest : Codable{
+    
+    let aaa : String
+    let bbb : String
+}
+
+
+
+struct TestError : Codable{
+    
+    let code : Int?
+    let description : String?
+    let isError : Bool
+}
+
+
+struct TestObj : Codable,Identifiable{
+    
+    let id : Int
+    let val : String
+}
+
+
+struct TestData : Codable{
+    
+    let objs : [TestObj]
+    let error : TestError
+}
